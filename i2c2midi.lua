@@ -224,13 +224,16 @@ I2M_DEF =
   }
 }
 
-
 function init ()
   -- Set up `ii` style hooks so that i2c2midi functions look like others
   ii.i2m = {}
+  ii.i2m.help = function ()
+    for _, cmd in ipairs(I2M_DEF.commands) do
+      print(cmd_show(cmd))
+    end
+  end
   
   for _, cmd in ipairs(I2M_DEF.commands) do
-    print(cmd_show(cmd))
     ii.i2m[cmd.name] = cmd_fn(I2M_DEF.i2c_address[1], cmd)
   end
 end
@@ -239,7 +242,7 @@ end
 function cmd_show (cmd)
   local arg_names = {}
   for i, arg in ipairs(cmd.args) do arg_names[i] = arg[1] end
-  return cmd.name..'('..table.concat(arg_names, ', ')..')\n-- '..cmd.docs
+  return cmd.name..'('..table.concat(arg_names, ', ')..')  -- '..cmd.docs
 end
 
 -- Convert a command's opcode and arguments to bytes
