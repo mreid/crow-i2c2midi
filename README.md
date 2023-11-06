@@ -1,6 +1,14 @@
 # crow-i2c2midi
 Simple crow library to send commands to the i2c2midi module.
 
+Two versions are avilable:
+1. Standalone implementation with range limits and docs: `i2c2midi.lua`
+2. More compact version with more commands and example usage: `i2c2midi-compact.lua`
+
+The first version hit memory limitations when I tried to add more commands, so I got
+rid of the range checking and shortened the doc strings. 
+
+
 ## Basic Usage
 
 From `druid` load and run the library with `r i2c2midi.lua`. Once loaded, you can call i2c2midi
